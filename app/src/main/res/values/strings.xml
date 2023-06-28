@@ -5,4 +5,5 @@
     <string name="general_interview">Загальна співбесіда</string>
     <string name="kotlin_java_interview">Співбесіда по Kotlin та Java</string>
     <string name="android_interview">Співбесіда по Android</string>
+    <string name="main_menu">Головне меню</string>
 </resources>
