@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TestInterview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="general_interview">Загальна співбесіда</string>
+    <string name="kotlin_java_interview">Співбесіда по Kotlin та Java</string>
+    <string name="android_interview">Співбесіда по Android</string>
 </resources>

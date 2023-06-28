@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="42dp"
+    android:gravity="center"
+    tools:context=".presentation.view.MainFragment">
+
+    <Button
+        android:id="@+id/button_general_interview"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="@drawable/main_button_background"
+        android:text="@string/general_interview"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/button_language_interview"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/main_button_background"
+        android:text="@string/kotlin_java_interview"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/button_android_interview"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/main_button_background"
+        android:text="@string/android_interview"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="16sp"/>
+
+
+</LinearLayout>
