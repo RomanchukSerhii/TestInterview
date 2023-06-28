@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".presentation.view.ListTopicFragment">
@@ -11,7 +12,9 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/topic_item"/>
 
     <Button
         android:id="@+id/button_main_menu"
@@ -19,7 +22,7 @@
         android:layout_height="55dp"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
         android:background="@drawable/main_button_background"
         android:layout_gravity="center"
         android:text="@string/main_menu"
