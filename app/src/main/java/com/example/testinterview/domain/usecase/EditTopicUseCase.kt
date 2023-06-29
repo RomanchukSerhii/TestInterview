@@ -6,7 +6,7 @@ import com.example.testinterview.domain.model.Topic
 class EditTopicUseCase(
     private val topicRepository: TopicRepository
 ) {
-    operator fun invoke(topic: Topic) {
+    suspend operator fun invoke(topic: Topic) {
         topicRepository.editTopic(topic)
     }
 }

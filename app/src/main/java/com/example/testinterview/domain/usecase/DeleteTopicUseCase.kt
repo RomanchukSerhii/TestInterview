@@ -6,7 +6,7 @@ import com.example.testinterview.domain.model.Topic
 class DeleteTopicUseCase(
     private val questionRepository: TopicRepository
 ) {
-    operator fun invoke(topicId: Int) {
+    suspend operator fun invoke(topicId: Int) {
         questionRepository.deleteTopic(topicId)
     }
 }

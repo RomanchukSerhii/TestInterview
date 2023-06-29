@@ -5,13 +5,13 @@ import com.example.testinterview.domain.model.Topic
 
 interface TopicRepository {
 
-    fun addTopic(topic: Topic)
+    suspend fun addTopic(topic: Topic)
 
-    fun deleteTopic(topicId: Int)
+    suspend fun deleteTopic(topicId: Int)
 
-    fun editTopic(topic: Topic)
+    suspend fun editTopic(topic: Topic)
 
-    fun getTopic(topicId: Int): Topic
+    suspend fun getTopic(topicId: Int): Topic
 
     fun getTopicList(): LiveData<List<Topic>>
 }
