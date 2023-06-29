@@ -8,4 +8,12 @@
     <string name="main_menu">Головне меню</string>
     <string name="delete_button">Кнопка видалення</string>
     <string name="button_start_interview">Кнопка запуску інтерв\'ю</string>
+    <string name="topic_name_edit_text">Введіть назву теми</string>
+    <string name="topic_hint">Тема</string>
+    <string name="category">Категорія</string>
+    <string name="kotlin_java">Kotlin та Java</string>
+    <string name="question_hint">Запитання</string>
+    <string name="answer_hint">Відповідь</string>
+    <string name="cancel">Скасувати</string>
+    <string name="save">Зберегти</string>
 </resources>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".presentation.view.AddQuestionFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_topic"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:contentDescription="@string/topic_name_edit_text"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/blue"
+        app:endIconMode="clear_text"
+        app:helperTextTextColor="@color/dark"
+        app:hintTextColor="@color/blue"
+        app:layout_constraintEnd_toStartOf="@id/button_more"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_topic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:hint="@string/topic_hint"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:minHeight="48dp"
+            android:textSize="15sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/button_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_more"
+        app:layout_constraintBottom_toBottomOf="@id/til_topic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/til_topic"
+        app:layout_constraintTop_toTopOf="@id/til_topic" />
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/category"
+        android:textColor="@color/dark"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_topic" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_language_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/kotlin_java"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toStartOf="@id/button_android_category"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_category" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_android_category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/kotlin_java"
+        android:textColor="@color/dark"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/button_language_category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_language_category"
+        app:layout_constraintTop_toTopOf="@id/button_language_category"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_question"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/topic_name_edit_text"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/blue"
+        app:endIconMode="clear_text"
+        app:helperTextTextColor="@color/dark"
+        app:hintTextColor="@color/blue"
+        app:layout_constraintTop_toBottomOf="@id/button_language_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:hint="@string/question_hint"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:minHeight="48dp"
+            android:textSize="15sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_answer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/topic_name_edit_text"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/blue"
+        app:endIconMode="clear_text"
+        app:helperTextTextColor="@color/dark"
+        app:hintTextColor="@color/blue"
+        app:layout_constraintTop_toBottomOf="@id/til_question"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:hint="@string/answer_hint"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:minHeight="48dp"
+            android:textSize="15sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_cancel"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="12dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/cancel"
+        android:textSize="16sp"
+        android:textColor="@color/dark"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_save"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="1dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_save"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="@string/save"
+        android:textSize="16sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/button_cancel"
+        app:layout_constraintBottom_toBottomOf="@id/button_cancel"
+        app:layout_constraintStart_toEndOf="@id/button_cancel"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
