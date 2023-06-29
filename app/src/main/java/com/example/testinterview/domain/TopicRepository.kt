@@ -7,7 +7,7 @@ interface TopicRepository {
 
     fun addTopic(topic: Topic)
 
-    fun deleteTopic(topic: Topic)
+    fun deleteTopic(topicId: Int)
 
     fun editTopic(topic: Topic)
 
