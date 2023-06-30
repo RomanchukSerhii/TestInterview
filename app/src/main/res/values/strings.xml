@@ -16,4 +16,6 @@
     <string name="answer_hint">Відповідь</string>
     <string name="cancel">Скасувати</string>
     <string name="save">Зберегти</string>
+    <string name="add_question">Додати запитання</string>
+    <string name="topic_list">Список тем</string>
 </resources>
