@@ -1,6 +1,8 @@
 package com.example.testinterview.domain.model
 
-enum class Category(name: String) {
+import androidx.room.Entity
+
+enum class Category(category: String) {
     LANGUAGE("Kotlin and Java"),
     ANDROID("Android")
 }

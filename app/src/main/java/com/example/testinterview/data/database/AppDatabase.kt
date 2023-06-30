@@ -4,16 +4,17 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.testinterview.domain.model.Question
 
-@Database(entities = [TopicDbModel::class], version = 1, exportSchema = false)
+@Database(entities = [QuestionDbModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun topicListDao(): TopicListDao
+    abstract fun questionListDao(): QuestionListDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
         private val LOCK = Any()
-        private const val DB_NAME = "topic.db"
+        private const val DB_NAME = "questions.db"
 
         fun getInstance(application: Application): AppDatabase {
             INSTANCE?.let {
