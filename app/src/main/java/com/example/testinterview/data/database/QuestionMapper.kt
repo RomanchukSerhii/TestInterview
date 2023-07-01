@@ -1,8 +1,9 @@
 package com.example.testinterview.data.database
 
 import com.example.testinterview.domain.model.Question
+import javax.inject.Inject
 
-class QuestionMapper {
+class QuestionMapper @Inject constructor(){
     fun mapDbModelToEntity(dbModel: QuestionDbModel): Question {
         return Question(
             id = dbModel.id,

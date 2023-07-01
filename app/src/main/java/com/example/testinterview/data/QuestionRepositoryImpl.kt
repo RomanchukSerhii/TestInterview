@@ -6,8 +6,9 @@ import com.example.testinterview.data.database.QuestionListDao
 import com.example.testinterview.data.database.QuestionMapper
 import com.example.testinterview.domain.QuestionRepository
 import com.example.testinterview.domain.model.Question
+import javax.inject.Inject
 
-class QuestionRepositoryImpl(
+class QuestionRepositoryImpl @Inject constructor(
     private val questionListDao: QuestionListDao,
     private val mapper: QuestionMapper
 ) : QuestionRepository {

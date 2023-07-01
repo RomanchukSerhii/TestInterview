@@ -1,14 +1,10 @@
-package com.example.testinterview
+package com.example.testinterview.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import androidx.fragment.app.Fragment
+import com.example.testinterview.R
 import com.example.testinterview.databinding.ActivityMainBinding
-import com.example.testinterview.databinding.TopicItemBinding
-import com.example.testinterview.presentation.view.AddQuestionFragment
-import com.example.testinterview.presentation.view.ListTopicFragment
-import com.example.testinterview.presentation.view.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
