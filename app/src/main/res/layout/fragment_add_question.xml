@@ -73,7 +73,9 @@
         app:layout_constraintEnd_toStartOf="@id/button_android_category"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_category" />
+        app:layout_constraintTop_toBottomOf="@id/tv_category"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_android_category"
@@ -114,11 +116,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_regular"
+            android:gravity="top"
             android:hint="@string/question_hint"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
-            android:inputType="textCapSentences"
+            android:inputType="textMultiLine"
+            android:lines="3"
             android:minHeight="48dp"
+            android:minLines="2"
             android:textSize="15sp"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -127,8 +132,9 @@
         android:id="@+id/til_answer"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
         android:contentDescription="@string/topic_name_edit_text"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/blue"
@@ -137,19 +143,21 @@
         app:hintTextColor="@color/blue"
         app:layout_constraintTop_toBottomOf="@id/til_question"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_cancel">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_answer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fontFamily="@font/inter_regular"
+            android:gravity="top"
             android:hint="@string/answer_hint"
             android:imeOptions="actionNext"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
-            android:lines="8"
             android:minHeight="48dp"
+            android:minLines="2"
             android:textSize="15sp"
             tools:ignore="SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>

@@ -18,4 +18,5 @@
     <string name="save">Зберегти</string>
     <string name="add_question">Додати запитання</string>
     <string name="topic_list">Список тем</string>
+    <string name="empty_field_error">Заповніть поле!</string>
 </resources>

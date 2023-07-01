@@ -17,6 +17,9 @@ class AddQuestionViewModel @Inject constructor(
     private val _state = MutableLiveData<AddQuestionState>()
     val state: LiveData<AddQuestionState> = _state
 
+    init {
+        _state.value = CategoryState(Category.LANGUAGE)
+    }
 
     fun switchCategory(category: Category) {
         _state.value = CategoryState(category)

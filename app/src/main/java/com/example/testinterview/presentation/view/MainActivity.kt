@@ -15,7 +15,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        startMainFragment()
+        if (savedInstanceState == null) {
+            startMainFragment()
+        }
         setMenuListeners()
     }
 
