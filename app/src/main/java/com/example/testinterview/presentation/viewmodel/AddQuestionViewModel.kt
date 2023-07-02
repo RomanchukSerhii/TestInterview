@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testinterview.domain.model.Category
 import com.example.testinterview.domain.model.Question
+import com.example.testinterview.domain.model.Topic
 import com.example.testinterview.domain.usecase.AddQuestionUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,7 +38,7 @@ class AddQuestionViewModel @Inject constructor(
         }
         val newQuestion = Question(
             category = category,
-            topic = topic,
+            topic = Topic(topic),
             title = title,
             answer = answer
         )
