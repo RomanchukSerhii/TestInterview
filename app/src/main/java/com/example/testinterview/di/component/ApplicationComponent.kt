@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.testinterview.di.annotation.ApplicationScope
 import com.example.testinterview.di.module.DataModule
 import com.example.testinterview.di.module.ViewModelModule
-import com.example.testinterview.presentation.view.AddQuestionFragment
+import com.example.testinterview.presentation.view.screens.AddQuestionFragment
 import dagger.BindsInstance
 import dagger.Component
 

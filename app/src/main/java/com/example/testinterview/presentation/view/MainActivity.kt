@@ -5,6 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.testinterview.R
 import com.example.testinterview.databinding.ActivityMainBinding
+import com.example.testinterview.presentation.view.screens.AddQuestionFragment
+import com.example.testinterview.presentation.view.screens.ListTopicFragment
+import com.example.testinterview.presentation.view.screens.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
