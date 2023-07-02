@@ -9,5 +9,6 @@ class TopicItemViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(topic: Topic) {
         binding.tvTopicName.text = topic.name
+        itemView.tag = topic
     }
 }
