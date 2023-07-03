@@ -4,11 +4,14 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentResultListener
@@ -59,11 +62,25 @@ class MoreTopicDialogFragment : DialogFragment() {
             .setView(dialogBinding.root)
             .create()
 
+        dialogBinding.editTextSearch.addTextChangedListener (object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.searchTopic(s.toString())
+            }
+
+        })
+
         return dialog
     }
 
     private fun observeViewModel() {
-        viewModel.topicListLD.observe(this) {
+        viewModel.initList(this)
+        viewModel.filteredTopicListLD.observe(this) {
             topicListAdapter.submitList(it)
         }
     }
@@ -78,11 +95,6 @@ class MoreTopicDialogFragment : DialogFragment() {
                 dismiss()
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.onCleared(this)
     }
 
     companion object {
