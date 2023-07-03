@@ -1,8 +1,10 @@
 package com.example.testinterview.presentation.viewmodel
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.testinterview.domain.model.Topic
 import com.example.testinterview.domain.usecase.GetQuestionListUseCase
 import javax.inject.Inject
 
@@ -12,19 +14,25 @@ class ListTopicViewModel @Inject constructor(
 
     private val questionListLD = getQuestionListUseCase.invoke()
 
-    private val _topicListLD = MutableLiveData<List<String>>()
-    val topicListLD: LiveData<List<String>> = _topicListLD
+    private val _topicListLD = MutableLiveData<List<Topic>>()
+    val topicListLD: LiveData<List<Topic>> = _topicListLD
 
     init {
-        val questionList = questionListLD.value
-        questionList?.let { list ->
-            val topicList = mutableListOf<String>()
-            list.forEach { question ->
-                if (!list.contains(question)) {
-                    topicList.add(question.topic)
+        questionListLD.observeForever { questionList ->
+            questionList?.let { list ->
+                val topicList = mutableListOf<Topic>()
+                list.forEach { question ->
+                    if (!topicList.contains(question.topic)) {
+                        topicList.add(question.topic)
+                    }
                 }
+                _topicListLD.value = topicList
             }
-            _topicListLD.value = topicList
         }
+    }
+
+    fun onCleared(owner: LifecycleOwner) {
+        questionListLD.removeObservers(owner)
+        super.onCleared()
     }
 }

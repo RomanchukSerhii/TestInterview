@@ -9,7 +9,7 @@ import com.example.testinterview.databinding.MoreTopicItemBinding
 import com.example.testinterview.domain.model.Topic
 
 class TopicListAdapter(
-    private val actionListener: TopicItemActionInterface
+    private val actionListener: TopicItemActionListener
 ) : ListAdapter<Topic, TopicItemViewHolder>(DiffCallback), View.OnClickListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicItemViewHolder {

@@ -85,7 +85,7 @@
         android:layout_marginTop="2dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/inter_regular"
-        android:text="@string/kotlin_java"
+        android:text="@string/android"
         android:textColor="@color/dark"
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="@id/button_language_category"

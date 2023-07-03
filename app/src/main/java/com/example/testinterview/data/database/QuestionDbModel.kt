@@ -1,5 +1,6 @@
 package com.example.testinterview.data.database
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.testinterview.domain.model.Category
@@ -10,7 +11,7 @@ data class QuestionDbModel (
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val category: Category,
-    val topic: Topic,
+    @Embedded val topic: Topic,
     val title: String,
     val answer: String
 )

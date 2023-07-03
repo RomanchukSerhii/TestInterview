@@ -19,4 +19,6 @@
     <string name="add_question">Додати запитання</string>
     <string name="topic_list">Список тем</string>
     <string name="empty_field_error">Заповніть поле!</string>
+    <string name="topic_search">Пошук теми</string>
+    <string name="android">Android</string>
 </resources>

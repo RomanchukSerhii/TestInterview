@@ -12,6 +12,8 @@ import com.example.testinterview.App
 import com.example.testinterview.R
 import com.example.testinterview.databinding.FragmentAddQuestionBinding
 import com.example.testinterview.domain.model.Category
+import com.example.testinterview.presentation.view.dialogs.MoreTopicDialogFragment
+import com.example.testinterview.presentation.view.dialogs.MoreTopicDialogListener
 import com.example.testinterview.presentation.viewmodel.AddQuestionViewModel
 import com.example.testinterview.presentation.viewmodel.CategoryState
 import com.example.testinterview.presentation.viewmodel.Error
@@ -19,6 +21,7 @@ import com.example.testinterview.presentation.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
 class AddQuestionFragment : Fragment() {
+
     private var _binding: FragmentAddQuestionBinding? = null
     private val binding: FragmentAddQuestionBinding
         get() = _binding ?: throw RuntimeException("FragmentAddQuestionBinding is null")
@@ -37,8 +40,8 @@ class AddQuestionFragment : Fragment() {
     private var category = Category.LANGUAGE
 
     override fun onAttach(context: Context) {
-        super.onAttach(context)
         component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(
@@ -54,6 +57,7 @@ class AddQuestionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         setListeners()
+        setupMoreTopicDialogListener()
     }
 
     private fun setListeners() {
@@ -74,6 +78,10 @@ class AddQuestionFragment : Fragment() {
                     answer =  etAnswer.text.toString()
                 )
             }
+
+            binding.buttonMore.setOnClickListener {
+                showMoreTopicDialogFragment()
+            }
         }
     }
 
@@ -92,6 +100,22 @@ class AddQuestionFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showMoreTopicDialogFragment() {
+        MoreTopicDialogFragment.show(parentFragmentManager)
+    }
+
+    private fun setupMoreTopicDialogListener() {
+        val listener: MoreTopicDialogListener = { topicName ->
+            binding.etTopic.setText(topicName)
+        }
+
+        MoreTopicDialogFragment.setupListener(
+            parentFragmentManager,
+            viewLifecycleOwner,
+            listener
+        )
     }
 
     private fun setLanguageCategory() {
