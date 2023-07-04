@@ -24,6 +24,7 @@ import com.example.testinterview.databinding.PartMoreTopicDialogBinding
 import com.example.testinterview.domain.model.Topic
 import com.example.testinterview.presentation.view.adapters.TopicItemActionListener
 import com.example.testinterview.presentation.view.adapters.TopicListAdapter
+import com.example.testinterview.presentation.view.adapters.TopicListLaunchMode
 import com.example.testinterview.presentation.viewmodel.ListTopicViewModel
 import com.example.testinterview.presentation.viewmodel.ViewModelFactory
 import javax.inject.Inject
@@ -45,7 +46,7 @@ class MoreTopicDialogFragment : DialogFragment() {
 
     private val topicListAdapter by lazy {
         val actionListener = getTopicItemActionListener()
-        TopicListAdapter(actionListener)
+        TopicListAdapter(TopicListLaunchMode.DIALOG, actionListener)
     }
 
     override fun onAttach(context: Context) {
@@ -104,6 +105,12 @@ class MoreTopicDialogFragment : DialogFragment() {
                     )
                 )
                 dismiss()
+            }
+
+            override fun onDeleteButtonClick(topic: Topic) {
+            }
+
+            override fun onPlayButtonClick(topic: Topic) {
             }
         }
     }
