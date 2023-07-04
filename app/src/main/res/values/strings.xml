@@ -21,4 +21,8 @@
     <string name="empty_field_error">Заповніть поле!</string>
     <string name="topic_search">Пошук теми</string>
     <string name="android">Android</string>
+    <string name="delete_topic">Видалення теми</string>
+    <string name="delete_topic_description">Видаляючи тему ви видаляєте всі запитання котрі відносяться до цієї теми. Ви дійсно бажаєте видалити цю тему?</string>
+    <string name="confirm">Так</string>
+    <string name="no">Ні</string>
 </resources>

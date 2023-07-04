@@ -6,9 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.example.testinterview.domain.model.Question
 import com.example.testinterview.domain.model.Topic
+import com.example.testinterview.domain.usecase.DeleteQuestionUseCase
 import com.example.testinterview.domain.usecase.GetQuestionListUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
@@ -21,7 +24,8 @@ fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observ
 }
 
 class ListTopicViewModel @Inject constructor(
-    private val getQuestionListUseCase: GetQuestionListUseCase
+    private val getQuestionListUseCase: GetQuestionListUseCase,
+    private val deleteQuestionUseCase: DeleteQuestionUseCase
 ) : ViewModel() {
 
     private val questionListLD = getQuestionListUseCase.invoke()
@@ -53,6 +57,22 @@ class ListTopicViewModel @Inject constructor(
                 topic -> topic.name.lowercase().contains(substring.lowercase())
             }
             _filteredTopicListLD.value = filteredTopicList
+        }
+    }
+
+    fun deleteTopic (topic: Topic) {
+        val questionList = questionListLD.value
+        questionList?.let { list ->
+            list.forEach { question ->
+                if (question.topic == topic) {
+                    viewModelScope.launch {
+                        deleteQuestionUseCase.invoke(questionId = question.id)
+                    }
+                }
+            }
+            val updateTopics = _filteredTopicListLD.value?.toMutableList()
+            updateTopics?.remove(topic)
+            _filteredTopicListLD.value = updateTopics?.toList()
         }
     }
 }
