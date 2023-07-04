@@ -3,6 +3,7 @@ package com.example.testinterview.presentation.view.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -58,6 +59,7 @@ class MoreTopicDialogFragment : DialogFragment() {
         dialogBinding.moreTopicRecyclerView.adapter = topicListAdapter
 
         val dialog = AlertDialog.Builder(requireContext())
+            .setCancelable(true)
             .setTitle(R.string.topic_list)
             .setView(dialogBinding.root)
             .create()
@@ -76,6 +78,15 @@ class MoreTopicDialogFragment : DialogFragment() {
         })
 
         return dialog
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val dialog = dialog
+        if (dialog != null) {
+            val windowHeight = resources.getDimensionPixelSize(R.dimen.dialog_height)
+            dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, windowHeight)
+        }
     }
 
     private fun observeViewModel() {

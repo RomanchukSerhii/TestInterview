@@ -77,9 +77,14 @@ class AddQuestionFragment : Fragment() {
                     title = etQuestion.text.toString(),
                     answer =  etAnswer.text.toString()
                 )
+                parentFragmentManager.popBackStack()
             }
 
-            binding.buttonMore.setOnClickListener {
+            buttonCancel.setOnClickListener {
+                parentFragmentManager.popBackStack()
+            }
+
+            buttonMore.setOnClickListener {
                 showMoreTopicDialogFragment()
             }
         }
