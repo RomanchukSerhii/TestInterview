@@ -87,7 +87,11 @@ class InterviewFragment : Fragment() {
             }
 
             override fun onEditButtonClick(question: Question) {
-                viewModel.editQuestion(question)
+                val fragment = AddQuestionFragment.newInstanceEditItem(questionId = question.id)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
             }
         }
     }

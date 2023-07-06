@@ -11,20 +11,13 @@ import javax.inject.Inject
 
 class InterviewViewModel @Inject constructor(
     private val getQuestionListUseCase: GetQuestionListUseCase,
-    private val deleteQuestionUseCase: DeleteQuestionUseCase,
-    private val editQuestionUseCase: EditQuestionUseCase
+    private val deleteQuestionUseCase: DeleteQuestionUseCase
 ) : ViewModel() {
     val questionListLD = getQuestionListUseCase.invoke()
 
     fun deleteQuestion(question: Question) {
         viewModelScope.launch {
             deleteQuestionUseCase.invoke(questionId = question.id)
-        }
-    }
-
-    fun editQuestion(question: Question) {
-        viewModelScope.launch {
-            editQuestionUseCase.invoke(question)
         }
     }
 }

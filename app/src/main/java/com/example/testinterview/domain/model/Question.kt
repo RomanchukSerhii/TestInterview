@@ -8,6 +8,6 @@ data class Question(
     var id: Int = UNDEFINED_ID
 ) {
     companion object {
-        private const val UNDEFINED_ID = 0
+        const val UNDEFINED_ID = 0
     }
 }

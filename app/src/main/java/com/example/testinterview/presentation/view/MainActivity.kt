@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.add_question -> {
-                    val fragment = AddQuestionFragment.newInstance()
+                    val fragment = AddQuestionFragment.newInstanceAddItem()
                     startNewFragment(fragment)
                     true
                 }
