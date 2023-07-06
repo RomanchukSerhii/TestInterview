@@ -28,4 +28,6 @@
     <string name="edit_question_button">Кнопка редагування запитання.</string>
     <string name="count_question">%d / %d</string>
     <string name="next_question">Наступне запитання</string>
+    <string name="delete_question">Видалення запитання</string>
+    <string name="delete_question_message">Ви дійсно бажаєте видалити це запитання назавжди?</string>
 </resources>
