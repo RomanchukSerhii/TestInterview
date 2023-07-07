@@ -30,7 +30,23 @@ class MainFragment : Fragment() {
     private fun setupListeners() {
         with(binding) {
             buttonGeneralInterview.setOnClickListener {
-                val fragment = InterviewFragment.newInstance()
+                val fragment = InterviewFragment.newInstanceGeneralMode()
+                parentFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, fragment)
+                    .commit()
+            }
+
+            buttonLanguageInterview.setOnClickListener {
+                val fragment = InterviewFragment.newInstanceLanguageMode()
+                parentFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, fragment)
+                    .commit()
+            }
+
+            buttonAndroidInterview.setOnClickListener {
+                val fragment = InterviewFragment.newInstanceAndroidMode()
                 parentFragmentManager.beginTransaction()
                     .addToBackStack(null)
                     .replace(R.id.fragment_container, fragment)

@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import com.example.testinterview.App
 import com.example.testinterview.R
 import com.example.testinterview.databinding.FragmentInterviewBinding
+import com.example.testinterview.domain.model.Category
 import com.example.testinterview.domain.model.Question
+import com.example.testinterview.domain.model.Topic
 import com.example.testinterview.presentation.view.adapters.QuestionItemActionListener
 import com.example.testinterview.presentation.view.adapters.QuestionListAdapter
 import com.example.testinterview.presentation.viewmodel.InterviewViewModel
@@ -42,9 +45,17 @@ class InterviewFragment : Fragment() {
         QuestionListAdapter(actionListener)
     }
 
+    private var questionMode = UNKNOWN_MODE
+    private var topicName = UNKNOWN_TOPIC_NAME
+
     override fun onAttach(context: Context) {
         component.inject(this)
         super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        parseParams()
     }
 
     override fun onCreateView(
@@ -63,7 +74,44 @@ class InterviewFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.questionListLD.observe(viewLifecycleOwner) {
-            questionListAdapter.submitList(it)
+            when(questionMode) {
+                GENERAL_MODE -> questionListAdapter.submitList(it)
+                LANGUAGE_MODE -> {
+                    questionListAdapter.submitList(
+                        it.filter { question -> question.category == Category.LANGUAGE }
+                    )
+                }
+                ANDROID_MODE -> {
+                    questionListAdapter.submitList(
+                        it.filter { question -> question.category == Category.ANDROID }
+                    )
+                }
+                TOPIC_MODE -> {
+                    questionListAdapter.submitList(
+                        it.filter { question -> question.topic.name == topicName }
+                    )
+                }
+            }
+        }
+    }
+
+    private fun parseParams() {
+        val args = requireArguments()
+        if (!args.containsKey(KEY_QUESTION_MODE)) {
+            throw RuntimeException("Param question mode is absent")
+        }
+
+        val mode = args.getString(KEY_QUESTION_MODE)
+        if (mode != GENERAL_MODE && mode != LANGUAGE_MODE && mode != ANDROID_MODE && mode != TOPIC_MODE) {
+            throw RuntimeException("Unknown question mode: $mode")
+        }
+        questionMode = mode
+
+        if (questionMode == TOPIC_MODE) {
+            if (!args.containsKey(KEY_TOPIC_NAME)) {
+                throw RuntimeException("Topic name is absent")
+            }
+            topicName = args.getString(KEY_TOPIC_NAME, UNKNOWN_TOPIC_NAME)
         }
     }
 
@@ -102,8 +150,47 @@ class InterviewFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): InterviewFragment {
-            return InterviewFragment()
+        private const val KEY_QUESTION_MODE = "KEY_QUESTION_MODE"
+        private const val KEY_TOPIC_NAME = "KEY_TOPIC_NAME"
+        private const val GENERAL_MODE = "GENERAL_MODE"
+        private const val LANGUAGE_MODE = "LANGUAGE_MODE"
+        private const val ANDROID_MODE = "ANDROID_MODE"
+        private const val TOPIC_MODE = "TOPIC_MODE"
+        private const val UNKNOWN_MODE = ""
+        private const val UNKNOWN_TOPIC_NAME = ""
+
+
+        fun newInstanceGeneralMode(): InterviewFragment {
+            return InterviewFragment().apply {
+                arguments = bundleOf(
+                    KEY_QUESTION_MODE to GENERAL_MODE
+                )
+            }
+        }
+
+        fun newInstanceLanguageMode(): InterviewFragment {
+            return InterviewFragment().apply {
+                arguments = bundleOf(
+                    KEY_QUESTION_MODE to LANGUAGE_MODE
+                )
+            }
+        }
+
+        fun newInstanceAndroidMode(): InterviewFragment {
+            return InterviewFragment().apply {
+                arguments = bundleOf(
+                    KEY_QUESTION_MODE to ANDROID_MODE
+                )
+            }
+        }
+
+        fun newInstanceTopicMode(topicName: String): InterviewFragment {
+            return InterviewFragment().apply {
+                arguments = bundleOf(
+                    KEY_QUESTION_MODE to TOPIC_MODE,
+                    KEY_TOPIC_NAME to topicName
+                )
+            }
         }
     }
 }

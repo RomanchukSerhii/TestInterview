@@ -93,6 +93,11 @@ class ListTopicFragment : Fragment() {
             }
 
             override fun onPlayButtonClick(topic: Topic) {
+                val fragment = InterviewFragment.newInstanceTopicMode(topic.name)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
             }
         }
     }
