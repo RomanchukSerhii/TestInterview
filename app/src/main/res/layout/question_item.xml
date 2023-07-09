@@ -19,6 +19,16 @@
         tools:text="1 / 56" />
 
     <ImageView
+        android:id="@+id/button_shuffle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="@string/shuffle_question_button"
+        android:src="@drawable/ic_shuffle_off"
+        app:layout_constraintEnd_toStartOf="@id/button_delete"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

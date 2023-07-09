@@ -47,6 +47,7 @@ class InterviewFragment : Fragment() {
 
     private var questionMode = UNKNOWN_MODE
     private var topicName = UNKNOWN_TOPIC_NAME
+    private var shuffleListState = NOT_SHUFFLED
 
     override fun onAttach(context: Context) {
         component.inject(this)
@@ -74,25 +75,33 @@ class InterviewFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.questionListLD.observe(viewLifecycleOwner) {
-            when(questionMode) {
-                GENERAL_MODE -> questionListAdapter.submitList(it)
+            var questionList = when (questionMode) {
+                GENERAL_MODE -> it
                 LANGUAGE_MODE -> {
-                    questionListAdapter.submitList(
-                        it.filter { question -> question.category == Category.LANGUAGE }
-                    )
+                    it.filter { question -> question.category == Category.LANGUAGE }
                 }
                 ANDROID_MODE -> {
-                    questionListAdapter.submitList(
-                        it.filter { question -> question.category == Category.ANDROID }
-                    )
+                    it.filter { question -> question.category == Category.ANDROID }
                 }
                 TOPIC_MODE -> {
-                    questionListAdapter.submitList(
-                        it.filter { question -> question.topic.name == topicName }
-                    )
+                    it.filter { question -> question.topic.name == topicName }
                 }
+                else -> throw RuntimeException("Unknown questionMode: $questionMode")
             }
+
+            if (shuffleListState) {
+                questionList = shuffleList(questionList)
+            }
+            questionListAdapter.submitList(questionList)
         }
+
+        viewModel.isShuffled.observe(viewLifecycleOwner) {
+            shuffleListState = it
+        }
+    }
+
+    private fun shuffleList(questionList: List<Question>): List<Question> {
+        return questionList.shuffled()
     }
 
     private fun parseParams() {
@@ -119,7 +128,7 @@ class InterviewFragment : Fragment() {
         return object : QuestionItemActionListener {
             override fun onDeleteButtonClick(question: Question) {
                 val listener = DialogInterface.OnClickListener { _, which ->
-                    when(which) {
+                    when (which) {
                         DialogInterface.BUTTON_POSITIVE -> viewModel.deleteQuestion(question)
                     }
 
@@ -170,6 +179,7 @@ class InterviewFragment : Fragment() {
         private const val TOPIC_MODE = "TOPIC_MODE"
         private const val UNKNOWN_MODE = ""
         private const val UNKNOWN_TOPIC_NAME = ""
+        private const val NOT_SHUFFLED = false
 
 
         fun newInstanceGeneralMode(): InterviewFragment {
