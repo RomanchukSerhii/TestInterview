@@ -21,6 +21,7 @@ class QuestionListAdapter(
         )
         binding.buttonDelete.setOnClickListener(this)
         binding.buttonEdit.setOnClickListener(this)
+        binding.buttonShowAnswer.setOnClickListener(this)
         return QuestionItemViewHolder(binding)
     }
 
@@ -35,11 +36,27 @@ class QuestionListAdapter(
     }
 
     override fun onClick(v: View?) {
-        val question = v?.tag as Question
-        when (v.id) {
-            R.id.button_delete -> actionListener.onDeleteButtonClick(question)
-            R.id.button_edit -> actionListener.onEditButtonClick(question)
+        when (v?.tag) {
+            is Question -> {
+                val question = v.tag as Question
+                when (v.id) {
+                    R.id.button_delete -> actionListener.onDeleteButtonClick(question)
+                    R.id.button_edit -> actionListener.onEditButtonClick(question)
+                }
+            }
+            is QuestionItemViewHolder -> {
+                val viewHolder = v.tag as QuestionItemViewHolder
+                when (v.id) {
+                    R.id.button_show_answer -> actionListener.onShowAnswerButtonClick(viewHolder)
+                }
+            }
+            is String -> {
+                when (v.id) {
+                    R.id.button_show_answer -> actionListener.onNextQuestionButtonClick()
+                }
+            }
         }
+
     }
 
     companion object {

@@ -15,8 +15,8 @@ import com.example.testinterview.R
 import com.example.testinterview.databinding.FragmentInterviewBinding
 import com.example.testinterview.domain.model.Category
 import com.example.testinterview.domain.model.Question
-import com.example.testinterview.domain.model.Topic
 import com.example.testinterview.presentation.view.adapters.QuestionItemActionListener
+import com.example.testinterview.presentation.view.adapters.QuestionItemViewHolder
 import com.example.testinterview.presentation.view.adapters.QuestionListAdapter
 import com.example.testinterview.presentation.viewmodel.InterviewViewModel
 import com.example.testinterview.presentation.viewmodel.ViewModelFactory
@@ -140,6 +140,18 @@ class InterviewFragment : Fragment() {
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
                     .commit()
+            }
+
+            override fun onShowAnswerButtonClick(viewHolder: QuestionItemViewHolder) {
+                viewHolder.showAnswer()
+            }
+
+            override fun onNextQuestionButtonClick() {
+                val currentPosition = binding.viewPager.currentItem
+
+                if (currentPosition < (binding.viewPager.adapter?.itemCount?.minus(1) ?: 0)) {
+                    binding.viewPager.currentItem = currentPosition + 1
+                }
             }
         }
     }

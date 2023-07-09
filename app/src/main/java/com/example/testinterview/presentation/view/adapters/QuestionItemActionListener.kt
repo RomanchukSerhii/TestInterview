@@ -7,4 +7,8 @@ interface QuestionItemActionListener {
     fun onDeleteButtonClick(question: Question)
 
     fun onEditButtonClick(question: Question)
+
+    fun onShowAnswerButtonClick(viewHolder: QuestionItemViewHolder)
+
+    fun onNextQuestionButtonClick()
 }
