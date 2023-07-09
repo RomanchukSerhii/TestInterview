@@ -30,4 +30,5 @@
     <string name="next_question">Наступне запитання</string>
     <string name="delete_question">Видалення запитання</string>
     <string name="delete_question_message">Ви дійсно бажаєте видалити це запитання назавжди?</string>
+    <string name="show_answer">Показати відповідь</string>
 </resources>
