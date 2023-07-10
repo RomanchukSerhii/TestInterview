@@ -22,6 +22,7 @@ class QuestionListAdapter(
         binding.buttonDelete.setOnClickListener(this)
         binding.buttonEdit.setOnClickListener(this)
         binding.buttonShowAnswer.setOnClickListener(this)
+        binding.buttonShuffle.setOnClickListener(this)
         return QuestionItemViewHolder(binding)
     }
 
@@ -31,8 +32,18 @@ class QuestionListAdapter(
         holder.bind(
             question = question,
             totalQuestionCount = currentList.size,
-            currentQuestionNumber = position + 1
+            currentQuestionNumber = position + 1,
+            shuffleMode = question.shuffleMode
         )
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val question = getItem(position)
+        return if (question.shuffleMode == Question.SHUFFLE_MODE_OFF) {
+            SHUFFLE_MODE_OFF
+        } else {
+            SHUFFLE_MODE_ON
+        }
     }
 
     override fun onClick(v: View?) {
@@ -50,9 +61,10 @@ class QuestionListAdapter(
                     R.id.button_show_answer -> actionListener.onShowAnswerButtonClick(viewHolder)
                 }
             }
-            is String -> {
-                when (v.id) {
+            else -> {
+                when (v?.id) {
                     R.id.button_show_answer -> actionListener.onNextQuestionButtonClick()
+                    R.id.button_shuffle -> actionListener.onShuffleButtonClick()
                 }
             }
         }
@@ -60,6 +72,9 @@ class QuestionListAdapter(
     }
 
     companion object {
+        private const val SHUFFLE_MODE_ON = 1
+        private const val SHUFFLE_MODE_OFF = 0
+
         private val DiffCallback = object : DiffUtil.ItemCallback<Question>() {
             override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
                 return oldItem.id == newItem.id

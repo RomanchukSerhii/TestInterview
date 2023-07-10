@@ -74,34 +74,10 @@ class InterviewFragment : Fragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.initList(this, questionMode, topicName)
         viewModel.questionListLD.observe(viewLifecycleOwner) {
-            var questionList = when (questionMode) {
-                GENERAL_MODE -> it
-                LANGUAGE_MODE -> {
-                    it.filter { question -> question.category == Category.LANGUAGE }
-                }
-                ANDROID_MODE -> {
-                    it.filter { question -> question.category == Category.ANDROID }
-                }
-                TOPIC_MODE -> {
-                    it.filter { question -> question.topic.name == topicName }
-                }
-                else -> throw RuntimeException("Unknown questionMode: $questionMode")
-            }
-
-            if (shuffleListState) {
-                questionList = shuffleList(questionList)
-            }
-            questionListAdapter.submitList(questionList)
+            questionListAdapter.submitList(it)
         }
-
-        viewModel.isShuffled.observe(viewLifecycleOwner) {
-            shuffleListState = it
-        }
-    }
-
-    private fun shuffleList(questionList: List<Question>): List<Question> {
-        return questionList.shuffled()
     }
 
     private fun parseParams() {
@@ -162,6 +138,10 @@ class InterviewFragment : Fragment() {
                     binding.viewPager.currentItem = currentPosition + 1
                 }
             }
+
+            override fun onShuffleButtonClick() {
+                viewModel.switchShuffleMode()
+            }
         }
     }
 
@@ -173,10 +153,10 @@ class InterviewFragment : Fragment() {
     companion object {
         private const val KEY_QUESTION_MODE = "KEY_QUESTION_MODE"
         private const val KEY_TOPIC_NAME = "KEY_TOPIC_NAME"
-        private const val GENERAL_MODE = "GENERAL_MODE"
-        private const val LANGUAGE_MODE = "LANGUAGE_MODE"
-        private const val ANDROID_MODE = "ANDROID_MODE"
-        private const val TOPIC_MODE = "TOPIC_MODE"
+        const val GENERAL_MODE = "GENERAL_MODE"
+        const val LANGUAGE_MODE = "LANGUAGE_MODE"
+        const val ANDROID_MODE = "ANDROID_MODE"
+        const val TOPIC_MODE = "TOPIC_MODE"
         private const val UNKNOWN_MODE = ""
         private const val UNKNOWN_TOPIC_NAME = ""
         private const val NOT_SHUFFLED = false

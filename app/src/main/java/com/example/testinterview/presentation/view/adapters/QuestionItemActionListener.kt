@@ -11,4 +11,6 @@ interface QuestionItemActionListener {
     fun onShowAnswerButtonClick(viewHolder: QuestionItemViewHolder)
 
     fun onNextQuestionButtonClick()
+
+    fun onShuffleButtonClick()
 }
