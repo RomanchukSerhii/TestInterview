@@ -40,6 +40,7 @@ class QuestionItemViewHolder(
 
             buttonDelete.tag = question
             buttonEdit.tag = question
+            buttonShuffle.tag = question
             buttonShowAnswer.tag = this@QuestionItemViewHolder
         }
     }

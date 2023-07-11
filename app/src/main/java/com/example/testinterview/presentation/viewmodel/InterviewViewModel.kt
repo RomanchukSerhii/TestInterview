@@ -53,16 +53,31 @@ class InterviewViewModel @Inject constructor(
         }
     }
 
-    fun switchShuffleMode() {
+    fun switchShuffleMode(currentQuestion: Question) {
         shuffleMode = !shuffleMode
         val questionList = questionListLD.value
         questionList?.let { list ->
             if (shuffleMode) {
-                val shuffleList= list.shuffled()
+
+                val shuffleList= shuffledList(list, currentQuestion)
                 _questionListLD.value = shuffleList.map { it.copy(shuffleMode = shuffleMode) }
             } else {
                 _questionListLD.value = notShuffledList
             }
         }
+    }
+
+    private fun shuffledList(list: List<Question>, currentQuestion: Question): List<Question> {
+        val questionPosition = list.indexOf(currentQuestion)
+        val shuffledList = list.shuffled().toMutableList()
+        val questionPositionAfterShuffle = shuffledList.indexOf(currentQuestion)
+        shuffledList.swap(questionPosition, questionPositionAfterShuffle)
+        return shuffledList.toList()
+    }
+
+    private fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
+        val temp = this[index1]
+        this[index1] = this[index2]
+        this[index2] = temp
     }
 }

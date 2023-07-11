@@ -53,6 +53,7 @@ class QuestionListAdapter(
                 when (v.id) {
                     R.id.button_delete -> actionListener.onDeleteButtonClick(question)
                     R.id.button_edit -> actionListener.onEditButtonClick(question)
+                    R.id.button_shuffle -> actionListener.onShuffleButtonClick(question)
                 }
             }
             is QuestionItemViewHolder -> {
@@ -64,7 +65,6 @@ class QuestionListAdapter(
             else -> {
                 when (v?.id) {
                     R.id.button_show_answer -> actionListener.onNextQuestionButtonClick()
-                    R.id.button_shuffle -> actionListener.onShuffleButtonClick()
                 }
             }
         }

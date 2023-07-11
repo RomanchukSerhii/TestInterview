@@ -127,6 +127,10 @@ class InterviewFragment : Fragment() {
                     .commit()
             }
 
+            override fun onShuffleButtonClick(question: Question) {
+                viewModel.switchShuffleMode(question)
+            }
+
             override fun onShowAnswerButtonClick(viewHolder: QuestionItemViewHolder) {
                 viewHolder.showAnswer()
             }
@@ -139,9 +143,7 @@ class InterviewFragment : Fragment() {
                 }
             }
 
-            override fun onShuffleButtonClick() {
-                viewModel.switchShuffleMode()
-            }
+
         }
     }
 

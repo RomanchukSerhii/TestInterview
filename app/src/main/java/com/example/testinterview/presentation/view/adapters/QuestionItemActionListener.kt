@@ -8,9 +8,9 @@ interface QuestionItemActionListener {
 
     fun onEditButtonClick(question: Question)
 
+    fun onShuffleButtonClick(question: Question)
+
     fun onShowAnswerButtonClick(viewHolder: QuestionItemViewHolder)
 
     fun onNextQuestionButtonClick()
-
-    fun onShuffleButtonClick()
 }
