@@ -27,29 +27,37 @@ class InterviewViewModel @Inject constructor(
     private var notShuffledList = listOf<Question>()
 
     fun initList(lifecycleOwner: LifecycleOwner, questionMode: String, topicName: String) {
-        questionListFromDB.observeOnce(lifecycleOwner) {
-            val questionList = when (questionMode) {
-                InterviewFragment.GENERAL_MODE -> it
-                InterviewFragment.LANGUAGE_MODE -> {
-                    it.filter { question -> question.category == Category.LANGUAGE }
-                }
-                InterviewFragment.ANDROID_MODE -> {
-                    it.filter { question -> question.category == Category.ANDROID }
-                }
-                InterviewFragment.TOPIC_MODE -> {
-                    it.filter { question -> question.topic.name == topicName }
-                }
-                else -> throw RuntimeException("Unknown questionMode: $questionMode")
-            }
-
-            _questionListLD.value = questionList
-            notShuffledList = questionList
-        }
+//        questionListFromDB.observeOnce(lifecycleOwner) {
+//            val questionList = when (questionMode) {
+//                InterviewFragment.GENERAL_MODE -> it
+//                InterviewFragment.LANGUAGE_MODE -> {
+//                    it.filter { question -> question.category == Category.LANGUAGE }
+//                }
+//                InterviewFragment.ANDROID_MODE -> {
+//                    it.filter { question -> question.category == Category.ANDROID }
+//                }
+//                InterviewFragment.TOPIC_MODE -> {
+//                    it.filter { question -> question.topic.name == topicName }
+//                }
+//                else -> throw RuntimeException("Unknown questionMode: $questionMode")
+//            }
+//
+//            _questionListLD.value = questionList
+//            notShuffledList = questionList
+//        }
     }
 
     fun deleteQuestion(question: Question) {
         viewModelScope.launch {
             deleteQuestionUseCase.invoke(questionId = question.id)
+        }
+
+        notShuffledList = notShuffledList.filter { it != question }
+
+        val currentList = questionListLD.value?.toMutableList()
+        currentList?.let {
+            it.remove(question)
+            _questionListLD.value = it
         }
     }
 

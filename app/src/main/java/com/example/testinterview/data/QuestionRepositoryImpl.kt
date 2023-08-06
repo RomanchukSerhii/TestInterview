@@ -1,11 +1,13 @@
 package com.example.testinterview.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.example.testinterview.data.database.QuestionListDao
 import com.example.testinterview.data.database.QuestionMapper
 import com.example.testinterview.domain.QuestionRepository
+import com.example.testinterview.domain.model.Category
 import com.example.testinterview.domain.model.Question
+import com.example.testinterview.domain.model.Topic
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class QuestionRepositoryImpl @Inject constructor(
@@ -31,7 +33,17 @@ class QuestionRepositoryImpl @Inject constructor(
         return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override fun getQuestionList(): LiveData<List<Question>> = questionListDao.getQuestionList().map {
+    override fun getQuestionList(): Flow<List<Question>> = questionListDao.getQuestionList().map {
         mapper.mapListDbModelToListEntity(it)
     }
+
+    override fun getLanguageQuestionList(): Flow<List<Question>> =
+        questionListDao.getQuestionListSortedByCategory(Category.LANGUAGE).map {
+            mapper.mapListDbModelToListEntity(it)
+        }
+
+    override fun getAndroidQuestionList(): Flow<List<Question>> =
+        questionListDao.getQuestionListSortedByCategory(Category.ANDROID).map {
+            mapper.mapListDbModelToListEntity(it)
+        }
 }

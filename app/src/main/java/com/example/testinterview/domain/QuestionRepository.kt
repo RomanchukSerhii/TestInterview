@@ -1,7 +1,8 @@
 package com.example.testinterview.domain
 
-import androidx.lifecycle.LiveData
 import com.example.testinterview.domain.model.Question
+import com.example.testinterview.domain.model.Topic
+import kotlinx.coroutines.flow.Flow
 
 interface QuestionRepository {
 
@@ -13,5 +14,9 @@ interface QuestionRepository {
 
     suspend fun getQuestion(questionId: Int): Question
 
-    fun getQuestionList(): LiveData<List<Question>>
+    fun getQuestionList(): Flow<List<Question>>
+
+    fun getLanguageQuestionList(): Flow<List<Question>>
+
+    fun getAndroidQuestionList(): Flow<List<Question>>
 }
